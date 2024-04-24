@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.BookList">
+    <children>
+        <VBox layoutX="18.0" layoutY="9.0" prefHeight="372.0" prefWidth="451.0">
+            <children>
+                <HBox alignment="TOP_RIGHT" prefHeight="38.0" prefWidth="600.0">
+                    <children>
+                        <Button fx:id="addbookButton" mnemonicParsing="false" onAction="#handleAddBookButtonClick" text="Add Books">
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="TOP_LEFT" prefHeight="38.0" prefWidth="600.0">
+                    <children>
+                        <Label text="BOOK LISTS">
+                            <font>
+                                <Font size="22.0" />
+                            </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+                <TableView fx:id="bookTable" prefWidth="178.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="bidColumn" minWidth="50" prefWidth="0.1" text="book_id">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="id" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="titColumn" minWidth="200" prefWidth="0.2" text="Title">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="name" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="genColumn" minWidth="100" prefWidth="0.2" text="Genre">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="name" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="availColumn" minWidth="100" prefWidth="0.2" text="Availability">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="name" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+                <HBox alignment="BOTTOM_CENTER" prefHeight="48.0" prefWidth="600.0">
+                    <children>
+                        <Button fx:id="back3" mnemonicParsing="false" onAction="#goBackClick3" text="Go Back">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin></Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox layoutX="496.0" layoutY="64.0" prefHeight="277.0" prefWidth="94.0" >
+            <children>
+                <Label text="Delete Book ID: "/>
+                <TextField fx:id="bookfield" />
+                <Button fx:id="confirmButton3" mnemonicParsing="false" text="Delete" onAction="#confirmButtonClick3">
+                    <VBox.margin>
+                        <Insets left="5.0" top="20.0" />
+                    </VBox.margin></Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

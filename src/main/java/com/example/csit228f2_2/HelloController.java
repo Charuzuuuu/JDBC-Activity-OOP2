@@ -6,61 +6,87 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import java.io.IOException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class HelloController {
 
     @FXML
-    private TextField nameField;
+    private TextField user;
 
     @FXML
-    private TextField emailField;
+    private PasswordField pass;
 
     @FXML
-    private Button submitButton;
+    private Button regButton;
 
     @FXML
-    private Button listButton;
-
-    @FXML
-    private void initialize() {
-        submitButton.setOnAction(event -> {
-            String name = nameField.getText();
-            String email = emailField.getText();
-
-            insertDataIntoDatabase(name, email);
-        });
-    }
-
-    private void insertDataIntoDatabase(String name, String email) {
-        try (Connection c = MySQLConnection.getConnection();
-             PreparedStatement statement = c.prepareStatement(
-                     "INSERT INTO users (name, email) VALUES (?, ?)")) {
-            statement.setString(1, name);
-            statement.setString(2, email);
-            int rowsInserted = statement.executeUpdate();
-
-            if (rowsInserted > 0) {
-                System.out.println("Data Inserted Successfully!");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void handleListButtonClick(ActionEvent event) throws IOException {
-        Stage stage = (Stage) listButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("user-lists-view.fxml"));
+    private void registerButtonClick(ActionEvent event) throws IOException {
+        Stage stage = (Stage) regButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("database-view.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void loginButtonClick(ActionEvent event) throws IOException{
+        String username = user.getText();
+        String password = pass.getText();
+
+        int userId = authenticateUser(username, password);
+
+        if (userId != -1) {
+            showAlert("Login Successful", "Welcome, " + username + "!");
+            BookList bk = new BookList(userId);
+            System.out.println(userId);
+            Stage stage = (Stage) regButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            showAlert("Login Failed", "Invalid username or password.");
+        }
+    }
+
+    private int authenticateUser(String username, String password) {
+        try (Connection c = MySQLConnection.getConnection();
+             PreparedStatement statement = c.prepareStatement(
+                     "SELECT id FROM users WHERE username = ? AND password = ?")) {
+
+            c.setAutoCommit(false);
+
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+
+            c.commit();
+            c.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

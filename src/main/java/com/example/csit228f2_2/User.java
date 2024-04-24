@@ -7,12 +7,16 @@ import javafx.beans.property.StringProperty;
 
 public class User {
     private final IntegerProperty id;
-    private final StringProperty name;
+    private final StringProperty fname;
+    private final StringProperty lname;
+    private final StringProperty uname;
     private final StringProperty email;
 
-    public User(int id, String name, String email) {
+    public User(int id, String fname, String lname, String uname, String email) {
         this.id = new SimpleIntegerProperty(id);
-        this.name = new SimpleStringProperty(name);
+        this.fname = new SimpleStringProperty(fname);
+        this.lname = new SimpleStringProperty(lname);
+        this.uname = new SimpleStringProperty(uname);
         this.email = new SimpleStringProperty(email);
     }
 
@@ -20,8 +24,16 @@ public class User {
         return id;
     }
 
-    public StringProperty nameProperty() {
-        return name;
+    public StringProperty fnameProperty() {
+        return fname;
+    }
+
+    public StringProperty lnameProperty() {
+        return lname;
+    }
+
+    public StringProperty unameProperty() {
+        return uname;
     }
 
     public StringProperty emailProperty() {
@@ -36,12 +48,28 @@ public class User {
         this.id.set(id);
     }
 
-    public String getName() {
-        return name.get();
+    public String getFName() {
+        return fname.get();
     }
 
-    public void setName(String name) {
-        this.name.set(name);
+    public void setFName(String fname) {
+        this.fname.set(fname);
+    }
+
+    public String getLName() {
+        return lname.get();
+    }
+
+    public void setLName(String lname) {
+        this.lname.set(lname);
+    }
+
+    public String getUName() {
+        return uname.get();
+    }
+
+    public void setUName(String uname) {
+        this.uname.set(uname);
     }
 
     public String getEmail() {

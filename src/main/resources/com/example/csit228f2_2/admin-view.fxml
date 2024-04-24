@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csit228f2_2.UserList">
+<children>
+    <VBox fillWidth="true" layoutX="8.0" layoutY="9.0" prefHeight="360.0" prefWidth="482.0">
+        <children>
+            <HBox alignment="TOP_RIGHT" prefWidth="212.0">
+                <Button fx:id="booklistButton" mnemonicParsing="false" onAction="#handleBookListButtonClick" text="See Book List">
+                  <HBox.margin>
+                     <Insets right="50.0" />
+                  </HBox.margin></Button>
+            </HBox>
+        <HBox prefWidth="212.0">
+        <Label text="USER LISTS">
+            <font>
+                <Font size="22.0" />
+            </font>
+                  <HBox.margin>
+                     <Insets left="50.0" />
+                  </HBox.margin></Label>
+        </HBox>
+    <TableView fx:id="userTable" prefWidth="178.0" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" minWidth="50" prefWidth="0.1" text="ID">
+                <cellValueFactory>
+                    <PropertyValueFactory property="id" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="fnameColumn" minWidth="100" prefWidth="0.2" text="First Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="lnameColumn" minWidth="100" prefWidth="0.2" text="Last Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="unameColumn" minWidth="80" prefWidth="0.15" text="Username">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="emailColumn" minWidth="150" prefWidth="0.35" text="Email">
+                <cellValueFactory>
+                    <PropertyValueFactory property="email" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="48.0" prefWidth="600.0">
+                <children>
+                    <Button fx:id="back2" mnemonicParsing="false" onAction="#goBackClick2" text="Go Back">
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin></Button>
+                </children>
+            </HBox>
+
+        </children>
+    </VBox>
+    <VBox layoutX="496.0" layoutY="64.0" prefHeight="277.0" prefWidth="94.0" >
+        <children>
+            <Label text="Delete User ID: "/>
+            <TextField fx:id="userid" />
+            <Button fx:id="confirmButton2" mnemonicParsing="false" text="Delete" onAction="#confirmButtonClick2">
+                <VBox.margin>
+                    <Insets left="5.0" top="20.0" />
+                </VBox.margin></Button>
+        </children>
+    </VBox>
+</children>
+
+</AnchorPane>
